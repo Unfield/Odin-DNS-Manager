@@ -41,7 +41,6 @@ export const load: PageServerLoad = async ({ locals }) => {
 
 function makeNewZoneArray(data: APIZone[], user: App.Locals["user"]): Zone[] {
   return data.map((entry) => {
-    console.log(entry);
     return {
       id: entry.id,
       owner: user.id,

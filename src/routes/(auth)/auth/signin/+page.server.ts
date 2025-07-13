@@ -33,6 +33,7 @@ interface LoginAPIError {
 
 export const actions = {
   default: async ({ request, cookies, url }: RequestEvent) => {
+    console.log("I got called");
     const form = await superValidate(request, zod4(schema));
 
     if (!form.valid) {
