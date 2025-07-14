@@ -235,6 +235,8 @@
     <title>Odin DNS - Zone Entry Management</title>
 </svelte:head>
 
+<p>{data.zoneName}</p>
+
 <div class="flex-1 rounded-xl p-4">
     <div class="flex items-center justify-between py-4">
         <Input
