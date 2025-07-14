@@ -76,6 +76,11 @@
     }
 
     function handleCreateSubmit() {
+        createZoneEntryData.name = createZoneEntryData.name.replace(
+            "." + data.zoneName,
+            "",
+        );
+
         let {
             data: createZoneEntryResponseData,
             loading: submittingCreate,
@@ -147,6 +152,11 @@
 
     function handleEditSubmit() {
         if (!selectedEntry) return;
+
+        selectedEntry.name = selectedEntry.name.replace(
+            "." + data.zoneName,
+            "",
+        );
 
         let {
             data: updateZoneEntryResponseData,
@@ -235,9 +245,8 @@
     <title>Odin DNS - Zone Entry Management</title>
 </svelte:head>
 
-<p>{data.zoneName}</p>
-
 <div class="flex-1 rounded-xl p-4">
+    <p class="text-muted-foreground">{data.zoneName}</p>
     <div class="flex items-center justify-between py-4">
         <Input
             placeholder="Filter entries..."

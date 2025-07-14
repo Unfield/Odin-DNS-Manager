@@ -51,7 +51,7 @@ export const load: PageServerLoad = async ({ locals, params }) => {
   if (error || !data || !data.records || data.count < 1)
     return {
       zoneEntries,
-      zoneData: null,
+      zoneName: "N/A",
     };
 
   return {
@@ -59,7 +59,6 @@ export const load: PageServerLoad = async ({ locals, params }) => {
       data.records,
       params.id,
       zoneData?.name || "",
-      locals.user,
     ),
     zoneName: zoneData?.name || "N/A",
   };
@@ -69,13 +68,12 @@ function makeNewZoneEntryArray(
   data: APIZoneRecord[],
   zoneId: string,
   zoneName: string,
-  user: App.Locals["user"],
 ): ZoneRecord[] {
   return data.map((entry) => {
     return {
       id: entry.id,
       zone_id: zoneId,
-      name: entry.name.replace(zoneName, ""),
+      name: entry.name.replace("." + zoneName, ""),
       type: entry.type,
       class: entry.class,
       priority: entry.priority,
