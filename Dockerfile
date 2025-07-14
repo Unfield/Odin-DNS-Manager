@@ -11,11 +11,13 @@ COPY package.json bun.lockb /temp/prod/
 RUN cd /temp/prod && bun install --frozen-lockfile --production
 
 FROM base AS prerelease
+ARG PUBLIC_API_BASE_URL
+
 COPY --from=install /temp/dev/node_modules node_modules
 COPY . .
 
 ENV NODE_ENV=production
-ENV PUBLIC_API_BASE_URL=http://localhost:8080
+ENV PUBLIC_API_BASE_URL=$PUBLIC_API_BASE_URL
 ENV ORIGIN=http://localhost:3000
 RUN bun run build
 

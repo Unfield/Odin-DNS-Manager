@@ -36,7 +36,6 @@
         >
         <DropdownMenu.Item
             class="cursor-pointer"
-            disabled
             onclick={() => onDelete?.(entry)}>Delete</DropdownMenu.Item
         >
     </DropdownMenu.Content>
