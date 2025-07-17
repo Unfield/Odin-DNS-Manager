@@ -85,7 +85,7 @@
         if (length < 40) return 4;
         if (length < 50) return 5;
         if (length < 60) return 6;
-        return 6;
+        return Math.floor(length / 20);
     }
 </script>
 
