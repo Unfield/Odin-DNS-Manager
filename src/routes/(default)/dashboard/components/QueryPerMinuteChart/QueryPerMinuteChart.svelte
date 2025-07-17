@@ -56,14 +56,17 @@
         ),
         errors: $qpmData?.reduce((acc, curr) => acc + (curr.errors || 0), 0),
         percentage: (() => {
-            const validPercentages =
-                $qpmData
-                    ?.map((item) => Number(item.percentage))
-                    .filter((rate) => !isNaN(rate) && isFinite(rate)) ?? [];
+            const totalRequests =
+                $qpmData?.reduce(
+                    (acc, curr) => acc + (curr.requests || 0),
+                    0,
+                ) || 0;
+            const totalErrors =
+                $qpmData?.reduce((acc, curr) => acc + (curr.errors || 0), 0) ||
+                0;
 
-            return validPercentages.length > 0
-                ? validPercentages.reduce((acc, curr) => acc + curr, 0) /
-                      validPercentages.length
+            return totalRequests > 0
+                ? ((totalRequests - totalErrors) / totalRequests) * 100
                 : 0;
         })(),
     });
@@ -78,10 +81,10 @@
 
     function calcTicks(length: number): number {
         if (length < 20) return 1;
-        if (length < 30) return 2;
-        if (length < 40) return 3;
-        if (length < 50) return 4;
-        if (length < 60) return 5;
+        if (length < 30) return 3;
+        if (length < 40) return 4;
+        if (length < 50) return 5;
+        if (length < 60) return 6;
         return 6;
     }
 </script>
