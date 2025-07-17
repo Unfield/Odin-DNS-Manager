@@ -6,7 +6,6 @@
     import { fetchApiWithLoading } from "$lib/utils/apiWithStatemachine";
     import { onMount } from "svelte";
     import * as userStore from "$lib/stores/userStore.svelte";
-    import { Button } from "$lib/components/ui/button";
     import { RotateCcwIcon } from "@lucide/svelte";
     import type { GenericErrorResponse, QPMData } from "$lib/types";
 
@@ -44,6 +43,9 @@
         $qpmData?.map((item) => ({
             ...item,
             time: new Date(item.time),
+            percentage:
+                item.percentage ??
+                ((item.requests - item.errors) / item.requests) * 100,
         })),
     );
 
@@ -73,6 +75,15 @@
             color: chartConfig[activeChart].color,
         },
     ]);
+
+    function calcTicks(length: number): number {
+        if (length < 20) return 1;
+        if (length < 30) return 2;
+        if (length < 40) return 3;
+        if (length < 50) return 4;
+        if (length < 60) return 5;
+        return 6;
+    }
 </script>
 
 <Card.Root class="h-full w-full">
@@ -153,7 +164,7 @@
                                 minute: "2-digit",
                             });
                         },
-                        ticks: ($qpmData?.length || 0) >= 20 ? 2 : 1,
+                        ticks: calcTicks($qpmData?.length || 0),
                     },
                     yAxis: {
                         format:
