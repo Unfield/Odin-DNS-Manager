@@ -44,7 +44,7 @@
             },
             {
                 key: "requests",
-                label: "Requests",
+                label: "Resolved",
                 color: chartConfig.requests.color,
             },
         ]}

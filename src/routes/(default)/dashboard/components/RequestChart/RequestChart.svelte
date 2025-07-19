@@ -77,7 +77,7 @@
 <Card.Root class="h-full w-full">
     <Card.Header class="flex justify-between">
         <span class="">
-            <Card.Title>Requests / Errors</Card.Title>
+            <Card.Title>Requests Resolved / Errors</Card.Title>
             <Card.Description>
                 {currentMonth} - {currentYear}
             </Card.Description>

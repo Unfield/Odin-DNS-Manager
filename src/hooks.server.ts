@@ -55,7 +55,8 @@ export const handle: Handle = async ({ event, resolve }) => {
   );
 
   if (err || !data) {
-    console.error("Error fetching user data:", err);
+    event.cookies.delete(ODIN_SESSION_ID, { path: "/" });
+    event.cookies.delete(ODIN_SESSION_TOKEN, { path: "/" });
     throw redirect(
       302,
       `/auth/signin?error=fetch_user_failed&redirected_from=${encodeURIComponent(event.url.pathname)}`,

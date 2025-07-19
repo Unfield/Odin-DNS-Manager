@@ -18,22 +18,17 @@
     let context = $state<ChartContextValue>();
     let activeChart = $state<keyof typeof chartConfig>("requests");
 
-    let {
-        data: qpmData,
-        loading,
-        error,
-        fetch: loadQpmData,
-    } = fetchApiWithLoading<QPMData[], GenericErrorResponse>(
-        "/api/v1/metrics/qpm",
-        {
-            method: "GET",
-            headers: {
-                Authorization: `Bearer ${userStore.getUser()?.token}`,
-                "Content-Type": "application/json",
-            },
-            returnType: "json",
+    let { data: qpmData, fetch: loadQpmData } = fetchApiWithLoading<
+        QPMData[],
+        GenericErrorResponse
+    >("/api/v1/metrics/qpm?limit=120", {
+        method: "GET",
+        headers: {
+            Authorization: `Bearer ${userStore.getUser()?.token}`,
+            "Content-Type": "application/json",
         },
-    );
+        returnType: "json",
+    });
 
     onMount(() => {
         loadQpmData();
