@@ -23,7 +23,7 @@
     let { chartData }: ChartProps = $props();
 
     const chartConfig = {
-        requests: { label: "Requests", color: "var(--chart-2)" },
+        requests: { label: "Resolved", color: "var(--chart-2)" },
         errors: { label: "Errors", color: "var(--chart-1)" },
     } satisfies Chart.ChartConfig;
     let context = $state<ChartContextValue>();
